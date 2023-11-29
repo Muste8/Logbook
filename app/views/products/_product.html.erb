@@ -1,4 +1,4 @@
-
+<br>
   <p>
     <strong>Product:</strong>
     <%= product.name %>
@@ -17,4 +17,12 @@
   <p>
     <strong>Total:</strong>
     <span>$</span><%= product.total %>
+  </p>
+
+  <p>
+    <%= link_to "Delete", [product.customer, product], data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                },
+                class:"btn btn-danger" %>
   </p>
