@@ -1,37 +1,23 @@
 <div id="<%= dom_id customer %>">
-  <p>
-    <strong>First name:</strong>
+
+  <td>
     <%= customer.first_name %>
-  </p>
+  </td>
 
-  <p>
-    <strong>Last name:</strong>
+  <td>
     <%= customer.last_name %>
-  </p>
+  </td>
 
-  <p>
-    <strong>Phone:</strong>
+  <td>
     <%= customer.phone %>
-  </p>
+  </td>
 
-  <p>
-    <strong>Email:</strong>
-    <%= customer.email %>
-  </p>
+  <td>
+    <a>$</a><%= customer.products.sum(:total) %>
+  </td>
 
-  <p>
-    <strong>Address:</strong>
-    <%= customer.address %>
-  </p>
-
-  <p>
-    <strong>Total:</strong>
-    <%= customer.products.sum(:total) %>
-  </p>
-
-  <p>
-    <strong>User:</strong>
+  <td>
     <%= customer.user_id %>
-  </p>
-
+  </td>
+    
 </div>
