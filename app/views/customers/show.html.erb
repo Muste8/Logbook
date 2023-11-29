@@ -8,3 +8,9 @@
 
   <%= button_to "Destroy this customer", @customer, method: :delete %>
 </div>
+
+<h2>Products</h2>
+<%= render @customer.products %>
+
+<h2>Add Product:</h2>
+<%= render 'products/form' %>

@@ -26,7 +26,7 @@
 
   <p>
     <strong>Total:</strong>
-    <%= customer.total %>
+    <%= customer.products.sum(:total) %>
   </p>
 
   <p>
