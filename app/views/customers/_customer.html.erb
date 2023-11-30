@@ -13,7 +13,7 @@
   </td>
 
   <td>
-    <a>$</a><%= customer.products.sum(:total) %>
+    <%= number_to_currency(customer.products.sum(:total)) %>
   </td>
 
   <td>

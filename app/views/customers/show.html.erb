@@ -9,7 +9,7 @@
   <hr class="my-4">
 
   <br>
-  <h2>TOTAL:$ <%= @customer.products.sum(:total) %></h2>
+  <h2>TOTAL: <%= number_to_currency(@customer.products.sum(:total)) %></h2>
   <% user = Customer.joins(:user).where(user: { id: @customer.user.id }).pluck(:username).first %>
   <em>Customer added by: <%= user.capitalize %> </em>
   
