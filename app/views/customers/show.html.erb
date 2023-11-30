@@ -7,8 +7,13 @@
     <%= @customer.email %> | <%= @customer.phone %> | <%= @customer.address %>
   </p>
   <hr class="my-4">
+
   <br>
   <h2>TOTAL:$ <%= @customer.products.sum(:total) %></h2>
+  <% user = Customer.joins(:user).where(user: { id: @customer.user.id }).pluck(:username).first %>
+  <em>Customer added by: <%= user.capitalize %> </em>
+  
+  <hr class="my-4">
   <%= link_to "Edit", edit_customer_path(@customer), class:"btn btn-secondary" %> 
   <%= link_to "Back", customers_path, class:"btn btn-dark" %>
      <%= link_to "Delete", customer_path(@customer), data: {

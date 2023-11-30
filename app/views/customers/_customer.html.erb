@@ -17,7 +17,8 @@
   </td>
 
   <td>
-    <%= customer.user_id %>
+    <% user = Customer.joins(:user).where(user: { id: customer.user.id }).pluck(:username).first %>
+    <%= user.capitalize %>
   </td>
     
 </div>
