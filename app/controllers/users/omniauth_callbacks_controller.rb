@@ -12,6 +12,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = User.from_omniauth(auth)
 
     if user.present?
+      auth_info = request.env['omniauth.auth']
+      
+      # Save token-related information to the user
+      user.access_token = auth_info.credentials.token
+      user.expires_at = auth_info.credentials.expires_at
+      user.refresh_token = auth_info.credentials.refresh_token
+      user.save!
+
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect user, event: :authentication
