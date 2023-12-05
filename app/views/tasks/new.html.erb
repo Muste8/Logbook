@@ -1,5 +1,5 @@
 <%= form_with(model: @task, local: true) do |form| %>
-  
+    <h1> Add to Google Calendar </h1>
     <div class="field">
       <%= form.label :title %>
       <%= form.text_field :title %>
@@ -21,8 +21,8 @@
     </div>
   
     <div class="field">
-      <%= form.label :event %>
-      <%= form.text_field :event %>
+      <% form.label :event %>
+      <% form.text_field :event %>
     </div>
   
     <div class="field">
@@ -34,3 +34,5 @@
       <%= form.submit %>
     </div>
   <% end %>
+
+<br> <%= link_to "Back", customers_path, class:"btn btn-dark" %>

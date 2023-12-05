@@ -8,3 +8,27 @@
     background-color: #e9ecef;
     border-radius: .3rem;
   }
+
+  body {
+    margin: 0;
+  }
+  
+  .left-div {
+    float: left;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .right-div {
+    float: right;
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+
+  }
+
+  .float-right {
+    float: right;
+  }
+  
