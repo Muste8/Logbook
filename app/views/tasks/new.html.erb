@@ -1,21 +1,22 @@
+<div class="center-wrapper">
 <%= form_with(model: @task, local: true) do |form| %>
     <h1> Add to Google Calendar </h1>
-    <div class="field">
+    <div class="field centered-form">
       <%= form.label :title %>
       <%= form.text_field :title %>
     </div>
   
-    <div class="field">
+    <div class="field centered-form">
       <%= form.label :description %>
       <%= form.text_field :description %>
     </div>
   
-    <div class="field">
+    <div class="field centered-form">
       <%= form.label :start_date %>
       <%= form.datetime_select :start_date %>
     </div>
   
-    <div class="field">
+    <div class="field centered-form">
       <%= form.label :end_date %>
       <%= form.datetime_select :end_date %>
     </div>
@@ -25,7 +26,7 @@
       <% form.text_field :event %>
     </div>
   
-    <div class="field">
+    <div class="field centered-form">
       <%= form.label :members %>
       <%= form.text_field :members %>
     </div>
@@ -36,3 +37,4 @@
   <% end %>
 
 <br> <%= link_to "Back", customers_path, class:"btn btn-dark" %>
+</div>

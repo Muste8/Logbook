@@ -13,3 +13,16 @@
  *= require_tree .
  *= require_self
  */
+ html body {
+    background-color: rgb(247, 237, 226);
+ }
+
+
+  
+.centered-form {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

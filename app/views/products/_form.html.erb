@@ -1,15 +1,15 @@
 <%= form_with model: [ @customer, @customer.products.build ] do |form| %>
     <p>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
+      <% form.label :name %><br>
+      <%= form.text_field :name, class:"form-control", placeholder:"Product Name" %>
     </p>
     <p>
-      <%= form.label :price %><br>
-      <%= form.number_field :price %>
+      <% form.label :price %><br>
+      <%= form.number_field :price, class:"form-control", placeholder:"Product Price" %>
     </p>
     <p>
-      <%= form.label :quantity %><br>
-      <%= form.number_field :quantity %>
+      <% form.label :quantity %><br>
+      <%= form.number_field :quantity, class:"form-control", placeholder:"Product Quantity" %>
     </p>
     <p>
       <%= form.submit %>

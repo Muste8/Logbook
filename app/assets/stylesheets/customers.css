@@ -5,8 +5,10 @@
 .jumbotron {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
-    background-color: #e9ecef;
+    background-color: #dee5ec;
+    border: 1px solid #ccc;
     border-radius: .3rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   body {
@@ -15,9 +17,13 @@
   
   .left-div {
     float: left;
-    width: 50%;
+    width: 48%;
     padding: 20px;
     box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-right: 5px;
   }
   
   .right-div {
@@ -25,7 +31,9 @@
     width: 50%;
     padding: 20px;
     box-sizing: border-box;
-
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   .float-right {
