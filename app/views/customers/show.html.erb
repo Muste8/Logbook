@@ -18,10 +18,17 @@
   <%= link_to "Back", customers_path, class:"btn btn-dark" %>
      <%= link_to "Delete", customer_path(@customer), data: {
      turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"btn btn-danger" %>
+  <%= link_to 'Create Event', new_task_path, class:"float-right btn btn-success" %>
 </div>
 
+
+<div class='left-div'>
 <h2>Customer Cart:</h2>
 <%= render @customer.products %>
+</div>
 
+<div class="right-div">
 <h2>Add Product:</h2>
 <%= render 'products/form' %>
+</div>
+

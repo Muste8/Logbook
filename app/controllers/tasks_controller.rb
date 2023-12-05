@@ -2,23 +2,62 @@ require "google/apis/calendar_v3"
 require "google/api_client/client_secrets.rb"
 
 class TasksController < ApplicationController
+  before_action :authenticate_user!
   CALENDAR_ID = 'primary'
- 
-  # GET /tasks/new
+
   def new
     @task = Task.new
   end
 
   def create
-    client = get_google_calendar_client current_user
-    task = params[:task]
-    event = get_event task
-    client.insert_event('primary', event)
-    flash[:notice] = 'Task was successfully added.'
-    redirect_to tasks_path
+    client = get_google_calendar_client(current_user)
+    task_params = params[:task]
+
+    #variables for start and end date
+          event_start = Time.new(
+        task_params['start_date(1i)'],
+        task_params['start_date(2i)'],
+        task_params['start_date(3i)'],
+        task_params['start_date(4i)'],
+        task_params['start_date(5i)']
+      ).to_datetime.rfc3339
+      
+      event_end = Time.new(
+        task_params['end_date(1i)'],
+        task_params['end_date(2i)'],
+        task_params['end_date(3i)'],
+        task_params['end_date(4i)'],
+        task_params['end_date(5i)']
+      ).to_datetime.rfc3339
+    
+    # Create a new Task object
+    @task = current_user.tasks.build(
+        title: task_params[:title],
+        description: task_params[:description],
+        start_date: event_start,
+        end_date: event_end,
+        members: task_params[:members]
+        # Add other attributes as needed
+      )
+
+    # Save the Task to the database
+    if @task.save
+      # Now you can associate the Task with the event or perform any additional logic
+
+      # Insert the event into Google Calendar
+      event = get_event(task_params)
+      client.insert_event(CALENDAR_ID, event)
+
+      flash[:notice] = 'Task was successfully added.'
+      redirect_to tasks_path
+    else
+      flash[:error] = 'Failed to save the task.'
+      Rails.logger.error(@task.errors.full_messages.join(', '))
+      render :new
+    end
   end
   
-  def get_google_calendar_client current_user
+  def get_google_calendar_client(current_user)
     client = Google::Apis::CalendarV3::CalendarService.new
     return unless (current_user.present? && current_user.access_token.present? && current_user.refresh_token.present?)
     secrets = Google::APIClient::ClientSecrets.new({
@@ -50,17 +89,28 @@ class TasksController < ApplicationController
   
   private
  
-  def get_event(task)
-    attendees = task[:members].split(',').map { |t| { email: t.strip } }
+  def get_event(task_params)
+    attendees = task_params[:members].split(',').map { |t| { email: t.strip } }
   
-    event_start = Time.new(task['start_date(1i)'], task['start_date(2i)'], task['start_date(3i)'],
-                           task['start_date(4i)'], task['start_date(5i)']).to_datetime.rfc3339
-    event_end = Time.new(task['end_date(1i)'], task['end_date(2i)'], task['end_date(3i)'],
-                         task['end_date(4i)'], task['end_date(5i)']).to_datetime.rfc3339
+    event_start = Time.new(
+      task_params['start_date(1i)'],
+      task_params['start_date(2i)'],
+      task_params['start_date(3i)'],
+      task_params['start_date(4i)'],
+      task_params['start_date(5i)']
+    ).to_datetime.rfc3339
+    
+    event_end = Time.new(
+      task_params['end_date(1i)'],
+      task_params['end_date(2i)'],
+      task_params['end_date(3i)'],
+      task_params['end_date(4i)'],
+      task_params['end_date(5i)']
+    ).to_datetime.rfc3339
   
-    event = Google::Apis::CalendarV3::Event.new(
-      summary: task[:title],
-      description: task[:description],
+    Google::Apis::CalendarV3::Event.new(
+      summary: task_params[:title],
+      description: task_params[:description],
       start: { date_time: event_start, time_zone: "America/Chicago" },
       end: { date_time: event_end, time_zone: "America/Chicago" },
       attendees: attendees,
