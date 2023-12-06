@@ -15,6 +15,28 @@
     margin: 0;
   }
   
+  .cart {
+    float: left;
+    width: 48%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+  }
+
+  .product {
+    float: right;
+    width: 48%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+  }
+  
   .left-div {
     float: left;
     width: 48%;
@@ -28,7 +50,7 @@
   
   .right-div {
     float: right;
-    width: 50%;
+    width: 48%;
     padding: 20px;
     box-sizing: border-box;
     border: 1px solid #ccc;
@@ -40,3 +62,32 @@
     float: right;
   }
   
+  .health {
+    font-size: 50px;
+    color: lightgreen;
+  }
+
+  .bleeding {
+    font-size: 50px;
+    color: crimson;
+  }
+
+  @media only screen and (max-width: 600px) {
+    /* Adjust the font size for smaller screens */
+    .bleeding {
+      font-size: 30px;
+    }
+    .health {
+        font-size: 30px;
+      }
+  }
+  
+  @media only screen and (min-width: 1200px) {
+    /* Adjust the font size for larger screens */
+    .bleeding {
+      font-size: 70px;
+    }
+    .health {
+        font-size: 70px;
+      }
+  }

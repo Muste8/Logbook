@@ -1,0 +1,10 @@
+<h2>Store Health</h2>
+<ul>
+  <strong>Store Employees</strong>
+  <% @user_customer_counts.each do |user| %>
+    <li>
+      Employee: <%= user.username.capitalize %>
+      Customers Count: <%= user.customer_count %>
+    </li>
+  <% end %>
+</ul>
