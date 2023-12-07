@@ -30,10 +30,11 @@
       <%= form.label :members %>
       <%= form.text_field :members %>
     </div>
-  
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+    <% unless current_user.provider.nil? %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
   <% end %>
 
 <br> <%= link_to "Back", customers_path, class:"btn btn-dark" %>
