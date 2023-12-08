@@ -32,9 +32,15 @@
 <h2>Add Product:</h2>
 </div>
 
-<div class='left-div' id='product-div'>
-<%= render @customer.products %>
-</div>
+<% if @customer.products.empty? %>
+  <div class='left-div'>
+    <em><%= @customer.first_name + " " + @customer.last_name %> currently has no products</em>
+  </div>
+<% else %>
+  <div class='left-div'>
+  <%= render @customer.products %>
+  </div>
+<% end %>
 
 <div class="right-div">
 <%= render 'products/form' %>
