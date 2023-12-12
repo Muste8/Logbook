@@ -63,11 +63,13 @@
   }
   
   .health {
+    padding: 1em;
     font-size: 50px;
     color: lightgreen;
   }
 
   .bleeding {
+    padding: 1em;
     font-size: 50px;
     color: crimson;
   }

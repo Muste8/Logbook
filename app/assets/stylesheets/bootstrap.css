@@ -1,0 +1,32 @@
+/* Styles for nav-link and nav-item */
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #007bff; /* Change the color to match your design */
+  text-decoration: none;
+}
+
+.nav-item {
+  display: inline-block;
+}
+
+/* Styles for btn btn-secondary */
+.btn-secondary {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+/* Styles for btn btn-outline-danger */
+.btn-outline-danger {
+  color: #dc3545;
+  background-color: transparent;
+  border-color: #dc3545;
+}
+
+/* Additional styles for btn-outline-danger on hover */
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}

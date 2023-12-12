@@ -1,6 +1,6 @@
 <div class="center-wrapper">
 <%= form_with(model: @task, local: true) do |form| %>
-    <h1> Set a Reminder! </h1>
+    <h1> Google Calendar </h1>
     <div class="field centered-form">
       <%= form.label :title %>
       <%= form.text_field :title %>
@@ -30,10 +30,11 @@
       <%= form.label :members %>
       <%= form.text_field :members %>
     </div>
-  
-    <div class="actions">
-      <%= form.submit %>
-    </div>
+    <% unless current_user.provider.nil? %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
   <% end %>
 
 <br> <%= link_to "Back", customers_path, class:"btn btn-dark" %>

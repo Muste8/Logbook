@@ -13,39 +13,20 @@ class TasksController < ApplicationController
     client = get_google_calendar_client(current_user)
     task_params = params[:task]
 
-    #variables for start and end date
-          event_start = Time.new(
-        task_params['start_date(1i)'],
-        task_params['start_date(2i)'],
-        task_params['start_date(3i)'],
-        task_params['start_date(4i)'],
-        task_params['start_date(5i)']
-      ).to_datetime.rfc3339
-      
-      event_end = Time.new(
-        task_params['end_date(1i)'],
-        task_params['end_date(2i)'],
-        task_params['end_date(3i)'],
-        task_params['end_date(4i)'],
-        task_params['end_date(5i)']
-      ).to_datetime.rfc3339
-    
-    # Create a new Task object
+    event_start = build_datetime(task_params, 'start_date')
+    event_end = build_datetime(task_params, 'end_date')
+
     @task = current_user.tasks.build(
-        title: task_params[:title],
-        description: task_params[:description],
-        start_date: event_start,
-        end_date: event_end,
-        members: task_params[:members]
-        # Add other attributes as needed
-      )
+      title: task_params[:title],
+      description: task_params[:description],
+      start_date: event_start,
+      end_date: event_end,
+      members: task_params[:members]
+      # Add other attributes as needed
+    )
 
-    # Save the Task to the database
     if @task.save
-      # Now you can associate the Task with the event or perform any additional logic
-
-      # Insert the event into Google Calendar
-      event = get_event(task_params)
+      event = build_event(task_params)
       client.insert_event(CALENDAR_ID, event)
 
       flash[:notice] = 'Task was successfully added.'
@@ -56,10 +37,13 @@ class TasksController < ApplicationController
       render :new
     end
   end
-  
+
+  private
+
   def get_google_calendar_client(current_user)
     client = Google::Apis::CalendarV3::CalendarService.new
     return unless (current_user.present? && current_user.access_token.present? && current_user.refresh_token.present?)
+
     secrets = Google::APIClient::ClientSecrets.new({
       "web" => {
         "access_token" => current_user.access_token,
@@ -68,6 +52,7 @@ class TasksController < ApplicationController
         "client_secret" => ENV["GOOGLE_API_SECRET"]
       }
     })
+
     begin
       client.authorization = secrets.to_authorization
       client.authorization.grant_type = "refresh_token"
@@ -81,33 +66,32 @@ class TasksController < ApplicationController
         )
       end
     rescue => e
-      flash[:error] = 'Your token has been expired. Please login again with google.'
-      redirect_to :back
+      handle_token_error
     end
+
     client
   end
-  
-  private
- 
-  def get_event(task_params)
+
+  def handle_token_error
+    flash[:error] = 'Your token has been expired. Please login again with Google.'
+    redirect_to :back
+  end
+
+  def build_datetime(params, prefix)
+    Time.new(
+      params["#{prefix}(1i)"],
+      params["#{prefix}(2i)"],
+      params["#{prefix}(3i)"],
+      params["#{prefix}(4i)"],
+      params["#{prefix}(5i)"]
+    ).to_datetime.rfc3339
+  end
+
+  def build_event(task_params)
     attendees = task_params[:members].split(',').map { |t| { email: t.strip } }
-  
-    event_start = Time.new(
-      task_params['start_date(1i)'],
-      task_params['start_date(2i)'],
-      task_params['start_date(3i)'],
-      task_params['start_date(4i)'],
-      task_params['start_date(5i)']
-    ).to_datetime.rfc3339
-    
-    event_end = Time.new(
-      task_params['end_date(1i)'],
-      task_params['end_date(2i)'],
-      task_params['end_date(3i)'],
-      task_params['end_date(4i)'],
-      task_params['end_date(5i)']
-    ).to_datetime.rfc3339
-  
+    event_start = build_datetime(task_params, 'start_date')
+    event_end = build_datetime(task_params, 'end_date')
+
     Google::Apis::CalendarV3::Event.new(
       summary: task_params[:title],
       description: task_params[:description],

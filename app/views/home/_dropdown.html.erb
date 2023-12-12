@@ -5,6 +5,7 @@
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
             <li><%= link_to 'Profile', edit_user_registration_path, class:"dropdown-item" %></li>
+            <li> <%= link_to 'ADMIN', admin_user_session_path, class:'dropdown-item' %> </li>
             <li> <%= link_to 'Sign Out', destroy_user_session_path, data: {
                 turbo_method: :delete }, class:"dropdown-item" %> </li>
         </ul>
@@ -15,6 +16,7 @@
             Account
         </a>
         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+            <li> <%= link_to 'ADMIN', admin_user_session_path, class:'dropdown-item' %> </li>
             <li> <%= link_to 'Sign In', new_user_session_path, class:"dropdown-item" %></li>
             <li> <%= link_to 'Sign Up', new_user_registration_path, class:"dropdown-item" %> </li>
         </ul>
