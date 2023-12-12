@@ -19,7 +19,7 @@
      <%= link_to "Delete", customer_path(@customer), data: {
      turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"btn btn-danger" %>
   <% unless current_user.provider.nil? %>
-    <%= link_to 'Create Event', new_task_path, class:"float-right btn btn-success" %>
+    <%= link_to 'Set Reminder', new_task_path, class:"float-right btn btn-success" %>
   <% end %>
 </div>
 

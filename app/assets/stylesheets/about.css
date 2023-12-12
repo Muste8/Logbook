@@ -1,0 +1,11 @@
+.about {
+    margin-left: 25%;
+    text-align: center;
+    width: 48%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+  }
