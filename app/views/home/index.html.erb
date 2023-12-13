@@ -10,7 +10,7 @@
     <%= render 'home/health' %>
   </div>
 
-  <div class="right-div">
+  <div class="right-div" id="popup-trigger">
     <% health = Product.sum(:total) %>
     <% if health < 5000 %>
       <p><%= number_to_currency((5000 - health - 5000).abs) %> <em>is spent of the monthly 5k limit!</em></p>
@@ -20,6 +20,16 @@
       <span class="bleeding"> <%= number_to_currency(5000 - health) %> </span>
     <% end %>
   </div>
+  <!-- Popup Container -->
+  <div id="popup-container" style="display: none;">
+    <div id="popup-content">
+      <!-- Add content for the popup explanation here -->
+      <h1>Total: <%= number_to_currency(health) %></h1>
+      <em></em>
+    </div>
+    <button class='btn btn-dark' id="close-popup">Close</button>
+  </div>
+
 <% else %>
   <%= button_to "Sign in", new_user_session_path, class:"btn btn-dark"%>
 <% end %>
