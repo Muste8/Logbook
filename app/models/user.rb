@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :customers
   belongs_to :role
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   validates :first_name, :last_name, :username, presence: true
   validates :role, presence: true

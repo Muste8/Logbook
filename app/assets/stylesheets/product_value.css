@@ -21,3 +21,8 @@
     margin-top: 10px;
     cursor: pointer;
   }
+
+  #popup-trigger{
+    text-align: center;
+    width: 45%;
+  }

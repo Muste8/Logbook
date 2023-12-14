@@ -3,8 +3,8 @@
 <% if user_signed_in?%>
 
 <br><br>
-  <div> 👋🏻 Welcome, <%= current_user.first_name.capitalize %>! </div>
-    <%=button_to "Sign out", destroy_user_session_path, method: :delete, class:"btn btn-dark float-right"%>
+  <div  class="float-right" style="font-size: 20px;"> 👋🏻 Welcome, <%= current_user.first_name.capitalize %>! </div>
+
     
   <div class="left-div">
     <%= render 'home/health' %>
@@ -13,7 +13,7 @@
   <div class="right-div" id="popup-trigger">
     <% health = Product.sum(:total) %>
     <% if health < 5000 %>
-      <p><%= number_to_currency((5000 - health - 5000).abs) %> <em>is spent of the monthly 5k limit!</em></p>
+      <i>Remaining balance after the total is subtracted:</i>
       <span class="health"> <%= number_to_currency(5000 - health) %> </span>
     <% elsif health > 5000 %>
       <strong>WARNING: OVER $5000 LIMIT! [Don't take new customers]</strong>
