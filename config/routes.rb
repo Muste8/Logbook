@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   resources :customers do
     resources :products
+    delete :delete_all_products, on: :member
   end
   
   devise_for :users, controllers: {

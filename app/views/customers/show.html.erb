@@ -18,9 +18,12 @@
   <%= link_to "Back", customers_path, class:"btn btn-dark" %>
      <%= link_to "Delete", customer_path(@customer), data: {
      turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"btn btn-danger" %>
+  <div class="float-right d-flex">
+  <%= button_to "Clear Cart", delete_all_products_customer_path(@customer), method: :delete, data: { confirm: "Are you sure?" }, class:'btn btn-danger' %> 
   <% unless current_user.provider.nil? %>
-    <%= link_to 'Set Reminder', new_task_path, class:"float-right btn btn-success" %>
+    <%= link_to 'Set Reminder', new_task_path, class:"btn btn-success", style:'margin-left: 5px' %>
   <% end %>
+  </div>
 </div>
 
 

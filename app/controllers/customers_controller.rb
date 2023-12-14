@@ -58,6 +58,13 @@ class CustomersController < ApplicationController
     end
   end
 
+  # DELETE /customers/1/delete_all_products
+  def delete_all_products
+    @customer = Customer.find(params[:id])
+    @customer.products.destroy_all
+    redirect_to customer_path(@customer), notice: 'All products associated with this customer have been deleted.'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
