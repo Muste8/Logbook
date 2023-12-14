@@ -1,3 +1,10 @@
+<% if @customers.empty? %>
+<div class="header">
+  <h1>No Customers</h1>
+  <p> New customers will show up here!</p>
+</div>
+
+<% else %>
 <div class="header">
   <h1>All Customers</h1>
 </div>
@@ -14,6 +21,7 @@
       <th> </th>
     </tr>
   </thead>
+<% end %>
   
   <tbody>
     <% @customers.each do |customer| %>
