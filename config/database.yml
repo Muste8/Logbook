@@ -23,3 +23,5 @@ test:
 production:
   <<: *default
   database: logbook_production
+  username: admin
+  password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
